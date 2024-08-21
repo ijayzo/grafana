@@ -12,7 +12,9 @@ Please follow instructions in the "Terraform instances" README (https://github.c
 
 @ EC2 Instance
 
-Add the service files to the /etc/systemd/system/ directory with the names defined in the repo. Add the script files anywhere, but remember to make them executable and to add the .sh suffix to the file (run the command to create the script in your working directory and then change permissions i.e. vi script.sh ; chmod u+x script.sh).
+Add the service files to the /etc/systemd/system/ directory with the names defined in the repo. 
+
+Add the script files anywhere, but remember to make them executable and to add the .sh suffix to the file (run the command to create the script in your working directory and then change permissions i.e. vi script.sh ; chmod u+x script.sh).
 
 	To run the script, the command will be the absolute path of the script i.e. ~/script.sh.
 
@@ -39,6 +41,9 @@ Input <EC2 Public IPv4 address>:<port> in your web browser.
 	+ now configure Prometheus data source by providing Prometheus URL, i.e. http://3.22.104.246:9090
 
 	# Creating Grafana Dashboard to Monitor Linux Server
+	+ Easy way is to import dashboards from some other user. Click the hamburger, then dashboards, then the Plus sign with a dropdown icon, import dashboard and paste 14513, then click load.
+
+	+ The not so easy way is to create dashboards with PromQL.
 	+ 
 
 
