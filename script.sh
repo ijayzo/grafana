@@ -1,4 +1,5 @@
 #!
+setenforce 0
 sudo dnf update -y
 sudo dnf install wget -y
 sudo useradd --no-create-home --shell /bin/false prometheus
