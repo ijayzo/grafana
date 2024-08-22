@@ -43,7 +43,7 @@ Input <EC2 Public IPv4 address>:<port> in your web browser.
 	# Creating Grafana Dashboard to Monitor Linux Server
 	+ Easy way is to import dashboards from some other user. Click the hamburger, then dashboards, then the Plus sign with a dropdown icon, import dashboard and paste 14513, then click load.
 
-	+ The not so easy way is to create dashboards with PromQL.
+	+ The not so easy way is to create dashboards with PromQL. PromQL syntax varies/depends on the table definition. 
 	+ 
 
 
