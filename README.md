@@ -61,7 +61,7 @@ Input <EC2 Public IPv4 address>:<port> in your web browser.
 		1. Traffic = Rate = (i.e.) sum(rate(http_request_duration_seconds_count{}[10m]))
 		2. Error Rate = Error Rate = (i.e.) sum(rate(http_request_duration_seconds_count{code!="200"}[10m]))
 		3. Latency = Duration = (i.e.) histogram_quantile(0.9, sum by(le) (rate(http_request_duration_seconds_bucket[10m])))
-		4. Saturation = Saturation = (i.e.) 100 - (avg by (node) (irate(node_cpu_seconds_total{node="minikube"}[5m])) * 100)
+		4. Saturation = Saturation = (i.e.) 100 - (avg by (node) (irate(node_cpu_seconds_total{node="minikube"}[5m])) * 100) = metric that measures the load on a server's resources, such as CPU, memory, disk capacity, and network bandwidth.
 
 			note : "RED" metrics = Rate, Error Rate, Duration 
 	
@@ -80,8 +80,13 @@ Input <EC2 Public IPv4 address>:<port> in your web browser.
 
 		note : Other metrics that can be used to measure system resources include memory, disk, and network bandwidth. 
 
-
-
+	# PromQL query for CPU Utilization = Using Saturation for the server's cpu. We are using node_exporter to scrape the system's metrics. 
+	- In prometheus, we search the metric "node_cpu_seconds_total"
+	- We will see entries such as "node_cpu_seconds_total{cpu="0", instance="18.217.48.21:9100", job="Node_Exporter", mode="idle"}"
+	- You may have multiple cpus, as i did; therefore, I created one panel per cpu and one panel showing all cpus.
+	- I used "100 - (avg((irate(node_cpu_seconds_total{cpu="0", mode="idle", job="Node_Exporter"}[1m]))) * 100)" and "100 - (avg((irate(node_cpu_seconds_total{cpu="1", mode="idle", job="Node_Exporter"}[1m]))) * 100)" as my two queries.
+	- To simplify into one query I used "100 - (avg by (cpu)((irate(node_cpu_seconds_total{mode="idle", job="Node_Exporter"}[1m]))) * 100)"
+	
 
 
 
