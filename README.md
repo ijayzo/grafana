@@ -6,7 +6,7 @@ using https://www.fosstechnix.com/install-prometheus-and-grafana-on-ubuntu-22-04
 
 @ Local Machine
 
-Please follow instructions in the "Terraform instances" README (https://github.com/ijayzo/terraformInstances/) if you want to create the instance with terraform and aws cli using my repos. Otherwise, the process is to create an aws instance (bigger than t2.micro). After the ec2 instance is created, make sure to copy in all the files that are not terraform files into the ec2 machine (service files, and scripts).
+Please follow instructions in the "Terraform instances" README (https://github.com/ijayzo/terraformInstances/) if you want to create the instance with terraform and aws cli using my repos; the only difference should be the security.tf file. Otherwise, the process is to create an aws instance (bigger than t2.micro). After the ec2 instance is created, make sure to copy in all the files that are not terraform files into the ec2 machine (service files, and scripts).
 
 ---
 
