@@ -54,10 +54,35 @@ Input <EC2 Public IPv4 address>:<port> in your web browser.
 		3. Ranged Vectors = select a range of samples back fro the current instant. use this data to easily calcultae rates of change, trends, or performing aggregations over a specified window.  
 	- Differences in functions from SQL (find the functions allowd in docs): Group By gets replaced with "by (<group by particular label>)". Rate = (value at t(f) - value at t(i))/(period in seconds), iRate (value at t(f) - value at t(f-1))/(period in seconds), Increase (value at t(f) - value at t(i)). 
 	- example SUM(http_server_requests_seconds_count{uri="/api/todos"})
+	- example rate(http_server_requests_seconds_count{uri="/api/todos", method="GET". status=~"2..|3..|4..", status!~"5.."}[3m])
+	- example histogram_quantile(0.9, sum by(le) (rate(<metric>[10m])))
+	- Prometheus queries for the four "golden" metrics that help us monitor our realtime applications
 		
-		
-	
+		1. Traffic = Rate = (i.e.) sum(rate(http_request_duration_seconds_count{}[10m]))
+		2. Error Rate = Error Rate = (i.e.) sum(rate(http_request_duration_seconds_count{code!="200"}[10m]))
+		3. Latency = Duration = (i.e.) histogram_quantile(0.9, sum by(le) (rate(http_request_duration_seconds_bucket[10m])))
+		4. Saturation = Saturation = (i.e.) 100 - (avg by (node) (irate(node_cpu_seconds_total{node="minikube"}[5m])) * 100)
 
+			note : "RED" metrics = Rate, Error Rate, Duration 
 	
+	# CPU (Central Processing Unit) Utilization = quantifies the percentage of time a computer's central processor is actively engaged in executing tasks. = a system-level performance metric that measures how much CPU time (Total CPU time is the sum of user time and system time; and total elapsed time is the length of the monitoring interval) an application needs to process a request. = indication of the total percentage of processing power exhausted to process data and running various programs on a network device, server, or computer at any given point. 
+	+ Besides top and htop, there are multiple other commands, such as mpstat, sar, and vmstat, in Linux, providing granular insights into system performance, including CPU utilization. top is the only one that comes pre-installed to Linux distros. 
+	+ Here are some metrics that can be used to measure CPU utilization: 
+	- User Time = the time the cpu spends executing user processes. The time the CPU spends executing instructions in user-mode processes. These processes are typically associated with applications and tasks initiated by the user.
+	- System Time (Kernel Time) = the time the cpu spends executing system/kernel processes. 
+	- Idle Time = the time the cpu is idle, not executing any processes 
+	- I/O Wait Time = the time the cpu waits for i/o operations to complete 
+	- Interrupt Time = Time spent handling hardware interrupts
+	- CPU usage percentage = Calculated by dividing the total CPU time by the total elapsed time during the monitoring interval. =  the proportion of time the processor spends actively performing computations compared to its idle time
+	- CPU pressure charts = High values in the some and full charts can indicate that processes are waiting for CPU resources, which can lead to high CPU utilization. 
+	- Load average = For single-CPU systems, load average can be used to measure system utilization during a given time period. For systems with multiple CPUs, the load needs to be divided by the number of processors to get a comparable measure. 
+	- Steal time = The percentage of time a virtual machine process waits for CPU time from the physical CPU. On a Linux server, the "top" command can be used to monitor processes and resource usage, where steal time is labeled as "st". 
+
+		note : Other metrics that can be used to measure system resources include memory, disk, and network bandwidth. 
+
+
+
+
+
 
 
