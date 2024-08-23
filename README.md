@@ -2,6 +2,10 @@
 
 using https://www.fosstechnix.com/install-prometheus-and-grafana-on-ubuntu-22-04/ as a reference.
 
+add nginx = https://www.fosstechnix.com/install-prometheus-and-grafana-on-ubuntu-22-04/
+
+add k8s = https://www.fosstechnix.com/kubernetes-cluster-monitoring-with-prometheus-and-grafana/#google_vignette
+
 ---
 
 @ Local Machine
