@@ -10,7 +10,7 @@ add k8s = https://www.fosstechnix.com/kubernetes-cluster-monitoring-with-prometh
 
 @ Local Machine
 
-Please follow instructions in the "Terraform instances" README (https://github.com/ijayzo/terraformInstances/) if you want to create the instance with terraform and aws cli using my repos; the only difference should be the security.tf file. Otherwise, the process is to create an aws instance (bigger than t2.micro). After the ec2 instance is created, make sure to copy in all the files that are not terraform files into the ec2 machine (service files, and scripts).
+Please follow instructions in the "Terraform instances" README (https://github.com/ijayzo/terraformInstances/) if you want to create the instance with terraform and aws cli; the only difference from my repo should be the security.tf file. Otherwise, the process is to create an aws instance (bigger than t2.micro). After the ec2 instance is created, make sure to copy all the files that are not terraform files into the ec2 machine (service files, and scripts).
 
 ---
 
@@ -41,11 +41,11 @@ Input <EC2 Public IPv4 address>:<port> in your web browser.
 - In Grafana (3000)
 	
 	# Configure Prometheus as Grafana DataSource	
-	+ Click the hamburger (three lines), click the dropdown icon next to Connections, click on Data sources then Add Data sources and select Prometheus. 
+	+ Click the hamburger (three lines) icons, click the dropdown icon next to Connections, click on Data sources then Add Data sources and select Prometheus. 
 	+ now configure Prometheus data source by providing Prometheus URL, i.e. http://3.22.104.246:9090
 
 	# Creating Grafana Dashboard to Monitor Linux Server
-	+ Easy way is to import dashboards from some other user. Click the hamburger, then dashboards, then the Plus sign with a dropdown icon, import dashboard and paste 14513, then click load.
+	+ Easy way is to import dashboards from some other user. Click the hamburger icon, then dashboards, then the Plus sign with a dropdown icon, import dashboard and paste 14513, then click load.
 
 	+ The not so easy way is to create dashboards with PromQL. PromQL syntax varies/depends on the table definition. 
 	- Differences in expressions from SQL: no need to use "select * FROM <desired query>" just name the desired query. Don't use WHERE to add a label to the metric, must use {label} and can do things like {label!=varable} and don't need AND from SQL, just use a comma, i.e. {label1=val1, label2=val2}. Can copy and paste labels from the prometheus webUI. SQL has OR, PromQL uses "=~" & using "|" (Regex). Instead of using NOT LIKE, we use the "!~" operator. WHERE Timestamp gets replaced with "@ <unix timestamp>"; if we cant 5 minutes from the previous time we user "<metric> offset 5m"; m is a time unit, multiple supproted by prometheus. 
